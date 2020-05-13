@@ -22,7 +22,7 @@
 
 // 定数
 //------------------------------------------------------------------
-#define SCREEN_SIZE_X	1000
+#define SCREEN_SIZE_X	960
 #define SCREEN_SIZE_Y	480
 #define ACC_G			10	// 重力加速度
 #define FRAME_TIME		0.3f	// [s]
