@@ -22,7 +22,7 @@
 
 // íËêî
 //------------------------------------------------------------------
-#define SCREEN_SIZE_X	768
+#define SCREEN_SIZE_X	768  
 #define SCREEN_SIZE_Y	480
 #define ACC_G			10	// èdóÕâ¡ë¨ìx
 #define FRAME_TIME		0.3f	// [s]

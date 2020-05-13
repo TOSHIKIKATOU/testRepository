@@ -1,1 +1,44 @@
-﻿  BaseProject.vcxproj -> D:\ヴィジュアルスタジオ\AsoRockman_20200116\Debug\BaseProject.exe
+﻿  effect.cpp
+C:\Users\PC_User\Desktop\5月課題\testRepository\nekoworld\effect.cpp(128,18): warning C4305:  '+=': 'double' から 'float' へ切り詰めます。
+C:\Users\PC_User\Desktop\5月課題\testRepository\nekoworld\effect.cpp(175,50): warning C4244:  '引数': 'float' から 'int' への変換です。データが失われる可能性があります。
+C:\Users\PC_User\Desktop\5月課題\testRepository\nekoworld\effect.cpp(174,57): warning C4244:  '引数': 'float' から 'int' への変換です。データが失われる可能性があります。
+C:\Users\PC_User\Desktop\5月課題\testRepository\nekoworld\effect.cpp(203,26): warning C4244:  '=': 'int' から 'float' への変換です。データが失われる可能性があります。
+C:\Users\PC_User\Desktop\5月課題\testRepository\nekoworld\effect.cpp(204,38): warning C4305:  '+=': 'double' から 'float' へ切り詰めます。
+C:\Users\PC_User\Desktop\5月課題\testRepository\nekoworld\effect.cpp(205,35): warning C4244:  '=': 'double' から 'float' への変換です。データが失われる可能性があります。
+C:\Users\PC_User\Desktop\5月課題\testRepository\nekoworld\effect.cpp(207,26): warning C4244:  '=': 'int' から 'float' への変換です。データが失われる可能性があります。
+C:\Users\PC_User\Desktop\5月課題\testRepository\nekoworld\effect.cpp(208,26): warning C4244:  '=': 'int' から 'float' への変換です。データが失われる可能性があります。
+C:\Users\PC_User\Desktop\5月課題\testRepository\nekoworld\effect.cpp(209,41): warning C4244:  '=': 'double' から 'float' への変換です。データが失われる可能性があります。
+C:\Users\PC_User\Desktop\5月課題\testRepository\nekoworld\effect.cpp(210,41): warning C4244:  '=': 'double' から 'float' への変換です。データが失われる可能性があります。
+C:\Users\PC_User\Desktop\5月課題\testRepository\nekoworld\effect.cpp(248,26): warning C4244:  '=': 'int' から 'float' への変換です。データが失われる可能性があります。
+C:\Users\PC_User\Desktop\5月課題\testRepository\nekoworld\effect.cpp(249,38): warning C4305:  '+=': 'double' から 'float' へ切り詰めます。
+C:\Users\PC_User\Desktop\5月課題\testRepository\nekoworld\effect.cpp(250,37): warning C4244:  '=': 'double' から 'float' への変換です。データが失われる可能性があります。
+C:\Users\PC_User\Desktop\5月課題\testRepository\nekoworld\effect.cpp(252,26): warning C4244:  '=': 'int' から 'float' への変換です。データが失われる可能性があります。
+C:\Users\PC_User\Desktop\5月課題\testRepository\nekoworld\effect.cpp(253,26): warning C4244:  '=': 'int' から 'float' への変換です。データが失われる可能性があります。
+C:\Users\PC_User\Desktop\5月課題\testRepository\nekoworld\effect.cpp(254,41): warning C4244:  '=': 'double' から 'float' への変換です。データが失われる可能性があります。
+  player2.cpp
+C:\Users\PC_User\Desktop\5月課題\testRepository\nekoworld\effect.cpp(255,41): warning C4244:  '=': 'double' から 'float' への変換です。データが失われる可能性があります。
+C:\Users\PC_User\Desktop\5月課題\testRepository\nekoworld\player2.cpp(170,52): warning C4244:  '-=': 'float' から 'int' への変換です。データが失われる可能性があります。
+C:\Users\PC_User\Desktop\5月課題\testRepository\nekoworld\player2.cpp(274,34): warning C4305:  '+=': 'double' から 'float' へ切り詰めます。
+C:\Users\PC_User\Desktop\5月課題\testRepository\nekoworld\player2.cpp(279,34): warning C4305:  '-=': 'double' から 'float' へ切り詰めます。
+C:\Users\PC_User\Desktop\5月課題\testRepository\nekoworld\player2.cpp(292,39): warning C4244:  '+=': 'float' から 'int' への変換です。データが失われる可能性があります。
+C:\Users\PC_User\Desktop\5月課題\testRepository\nekoworld\player2.cpp(305,35): warning C4244:  '+=': 'float' から 'int' への変換です。データが失われる可能性があります。
+C:\Users\PC_User\Desktop\5月課題\testRepository\nekoworld\player2.cpp(322,39): warning C4244:  '+=': 'float' から 'int' への変換です。データが失われる可能性があります。
+C:\Users\PC_User\Desktop\5月課題\testRepository\nekoworld\player2.cpp(335,35): warning C4244:  '+=': 'float' から 'int' への変換です。データが失われる可能性があります。
+  keycheck.cpp
+  main.cpp
+  player.cpp
+C:\Users\PC_User\Desktop\5月課題\testRepository\nekoworld\player2.cpp(123,5): warning C4101:  'indexPos2': ローカル変数は 1 度も使われていません。
+C:\Users\PC_User\Desktop\5月課題\testRepository\nekoworld\player.cpp(168,51): warning C4244:  '-=': 'float' から 'int' への変換です。データが失われる可能性があります。
+C:\Users\PC_User\Desktop\5月課題\testRepository\nekoworld\player.cpp(265,34): warning C4305:  '+=': 'double' から 'float' へ切り詰めます。
+C:\Users\PC_User\Desktop\5月課題\testRepository\nekoworld\player.cpp(270,34): warning C4305:  '-=': 'double' から 'float' へ切り詰めます。
+C:\Users\PC_User\Desktop\5月課題\testRepository\nekoworld\player.cpp(283,38): warning C4244:  '+=': 'float' から 'int' への変換です。データが失われる可能性があります。
+C:\Users\PC_User\Desktop\5月課題\testRepository\nekoworld\player.cpp(296,35): warning C4244:  '+=': 'float' から 'int' への変換です。データが失われる可能性があります。
+C:\Users\PC_User\Desktop\5月課題\testRepository\nekoworld\player.cpp(312,38): warning C4244:  '+=': 'float' から 'int' への変換です。データが失われる可能性があります。
+C:\Users\PC_User\Desktop\5月課題\testRepository\nekoworld\player.cpp(325,35): warning C4244:  '+=': 'float' から 'int' への変換です。データが失われる可能性があります。
+  shot.cpp
+  shot2.cpp
+  stage.cpp
+  コードを生成中...
+C:\Users\PC_User\Desktop\5月課題\testRepository\nekoworld\player.cpp(122,5): warning C4101:  'indexPos': ローカル変数は 1 度も使われていません。
+C:\Users\PC_User\Desktop\5月課題\testRepository\nekoworld\player.cpp(122,5): warning C4101: C:\Users\PC_User\Desktop\5月課題\testRepository\nekoworld\stage.cpp : fatal error C1090: PDB API の呼び出しに失敗しました。エラー コード '3': C:\Users\PC_User\Desktop\5月課題\testRepository\nekoworld\Debug\vc142.pdb
+D:\新しいフォルダー\MSBuild\Microsoft\VC\v160\Microsoft.CppCommon.targets(429,5): error MSB6006: "CL.exe" はコード 1 を伴って終了しました。
