@@ -8,41 +8,41 @@
 
 //#pragma once
 
-//���Ă̒�`
+//ｱｻｰﾄの定義
 #ifdef _DEBUG
 #define AST() {\
 	CHAR ast_msg[256];\
-	wsprintf(ast_msg, "%s %d�s��\0", __FILE__, __LINE__);\
-	MessageBox(0, ast_msg, "�A�T�[�g�\��", MB_OK);\
+	wsprintf(ast_msg, "%s %d行目\0", __FILE__, __LINE__);\
+	MessageBox(0, ast_msg, "アサート表示", MB_OK);\
 	}
 #else
 #define AST()
 #endif
 
 
-// �萔
+// 定数
 //------------------------------------------------------------------
-#define SCREEN_SIZE_X	768  
+#define SCREEN_SIZE_X	1000
 #define SCREEN_SIZE_Y	480
-#define ACC_G			10	// �d�͉����x
+#define ACC_G			10	// 重力加速度
 #define FRAME_TIME		0.3f	// [s]
 
 
 
 
-// �񋓌^�̒�`
+// 列挙型の定義
 //------------------------------------------------------------------
-// ��݊Ǘ��p
+// ｼｰﾝ管理用
 enum SCENE_ID
 {
-	SCENE_ID_INIT,			// ���������
-	SCENE_ID_TITLE,			// ���ټ��
-	SCENE_ID_GAME,			// �ްѼ��
-	SCENE_ID_GAMEOVER,		// �ްѵ��ް���
+	SCENE_ID_INIT,			// 初期化ｼｰﾝ
+	SCENE_ID_TITLE,			// ﾀｲﾄﾙｼｰﾝ
+	SCENE_ID_GAME,			// ｹﾞｰﾑｼｰﾝ
+	SCENE_ID_GAMEOVER,		// ｹﾞｰﾑｵｰﾊﾞｰｼｰﾝ
 	SCENE_ID_MAX,
 };
 
-// ��ڲ԰�Ǘ��p
+// ﾌﾟﾚｲﾔｰ管理用
 enum PLAYER {
 	PLAYER1
 	, PLAYER2
@@ -68,40 +68,40 @@ struct XY_F {
 };
 
 struct CHARACTER {
-	DIR moveDir;	//�����Ă������
-	XY pos;			//�L�����N�^�̈ʒu�i���S�j
-	XY size;		//�L�����N�^�摜�̃T�C�Y
-	XY sizeOffset;		//�L�����N�^��������̍���ʒu
-	XY hitPosS;		//�����蔻��p�̍���
-	XY hitPosE;		//�����蔻��p�̉E��
-	bool runFlag;		//�L�����N�^�̏�ԁi�����Ă��邩�H�j
-	bool jumpFlag;		//�L�����N�^�̏�ԁi�W�����v���Ă��邩�H�j
-	bool shotFlag;		//�L�����N�^�̏�ԁi�e�����Ă��邩�H�j
-	bool damageFlag;	//�L�����N�^�̏�ԁi�_���[�W�󂯂Ă��邩�H�j
-	XY_F velocity;		// ��׸��̑��x
-	int moveSpeed;		//�L�����N�^�̈ړ���
-	int life;		//�L�����N�^�̗̑�
-	int lifeMax;		//�L�����N�^�̗͍̑ő�
-	int animCnt;		//�L�����N�^�̃A�j���[�V�����p�J�E���^
-	int imgLockCnt;		//�L�����N�^�̃C���[�W�Œ�p�J�E���^
-	bool visible;		//�\�����
-	int type;			//���炩�̑������i�[�ł���B
+	DIR moveDir;	//向いている方向
+	XY pos;			//キャラクタの位置（中心）
+	XY size;		//キャラクタ画像のサイズ
+	XY sizeOffset;		//キャラクタ中央からの左上位置
+	XY hitPosS;		//当たり判定用の左上
+	XY hitPosE;		//当たり判定用の右下
+	bool runFlag;		//キャラクタの状態（走っているか？）
+	bool jumpFlag;		//キャラクタの状態（ジャンプしているか？）
+	bool shotFlag;		//キャラクタの状態（弾撃っているか？）
+	bool damageFlag;	//キャラクタの状態（ダメージ受けているか？）
+	XY_F velocity;		// ｷｬﾗｸﾀの速度
+	int moveSpeed;		//キャラクタの移動量
+	int life;		//キャラクタの体力
+	int lifeMax;		//キャラクタの体力最大
+	int animCnt;		//キャラクタのアニメーション用カウンタ
+	int imgLockCnt;		//キャラクタのイメージ固定用カウンタ
+	bool visible;		//表示状態
+	int type;			//何らかの属性を格納できる。
 };
 
 
-// �������ߐ錾
+// ﾌﾟﾛﾄﾀｲﾌﾟ宣言
 //------------------------------------------------------------------
-bool SystemInit(void);							// ���я�����
-void InitScene(void);							// �������p��ݗp
-// ���ټ��
-void TitleScene(void);							// ���ټ�ݗp
-void TitleDraw(void);							// ���ټ�݂̕`��
-// �ްѼ��
-void GameScene(void);							// �ްѼ�ݗp
-void GameSceneDraw(void);						// �ްѼ�݂̕`��
-// �ްѵ��ް���
-void GameOverScene(void);						// �ްѵ��ް��ݗp
-void GameOverDraw(void);						// �ްѵ��ް��݂̕`��
+bool SystemInit(void);							// ｼｽﾃﾑ初期化
+void InitScene(void);							// 初期化用ｼｰﾝ用
+// ﾀｲﾄﾙｼｰﾝ
+void TitleScene(void);							// ﾀｲﾄﾙｼｰﾝ用
+void TitleDraw(void);							// ﾀｲﾄﾙｼｰﾝの描画
+// ｹﾞｰﾑｼｰﾝ
+void GameScene(void);							// ｹﾞｰﾑｼｰﾝ用
+void GameSceneDraw(void);						// ｹﾞｰﾑｼｰﾝの描画
+// ｹﾞｰﾑｵｰﾊﾞｰｼｰﾝ
+void GameOverScene(void);						// ｹﾞｰﾑｵｰﾊﾞｰｼｰﾝ用
+void GameOverDraw(void);						// ｹﾞｰﾑｵｰﾊﾞｰｼｰﾝの描画
 
 
 
