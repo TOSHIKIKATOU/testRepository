@@ -15,6 +15,7 @@
 //--------------------------------------------------------------------------------------------
 int chipImage[13];
 XY mapPos;
+int haikeiimage;
 
 int map[MAP_Y][MAP_X] = {
 { 12, 0, 0, 0, 0, 0, 0, 0,	0, 0, 0, 0, 0, 0, 0, 0,  0, 0, 0, 0, 0, 0, 0, 0,  0, 0, 0, 0, 0, 0, 0, 0,  0, 0, 0, 0, 0, 0, 0, 0,  0, 0, 0, 0, 0, 0, 0, 0,  0, 0, 0, 0, 0, 0, 0, 0,  0, 0, 0, 0, 0, 0, 0,12 },
@@ -52,7 +53,7 @@ bool StageSystemInit(void)
 		return false;
 	}
 
-	
+	LoadGraph("image/haikei.png");
 
 	return true;
 }
@@ -125,6 +126,9 @@ void StageGameDraw(void)
 				, y * CHIP_SIZE_Y + -mapPos.y
 				, chipImage[map[y][x]], true);
 		}
-
 	}
+
+	DrawGraph(0
+		, 0
+		, haikeiimage, true);
 }

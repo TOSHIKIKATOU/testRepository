@@ -41,6 +41,7 @@ C:\Users\PC_User\Desktop\5月課題\testRepository\nekoworld\player2.cpp(305,35)
 C:\Users\PC_User\Desktop\5月課題\testRepository\nekoworld\player2.cpp(322,39): warning C4244: '+=': 'float' から 'int' への変換です。データが失われる可能性があります。
 C:\Users\PC_User\Desktop\5月課題\testRepository\nekoworld\player2.cpp(335,35): warning C4244: '+=': 'float' から 'int' への変換です。データが失われる可能性があります。
 C:\Users\PC_User\Desktop\5月課題\testRepository\nekoworld\player2.cpp(123,5): warning C4101: 'indexPos2': ローカル変数は 1 度も使われていません。
+  scene.cpp
   shot.cpp
 C:\Users\PC_User\Desktop\5月課題\testRepository\nekoworld\main.h(1,1): warning C4819: ファイルは、現在のコード ページ (932) で表示できない文字を含んでいます。データの損失を防ぐために、ファイルを Unicode 形式で保存してください。
   shot2.cpp
@@ -48,4 +49,4 @@ C:\Users\PC_User\Desktop\5月課題\testRepository\nekoworld\main.h(1,1): warnin
   stage.cpp
 C:\Users\PC_User\Desktop\5月課題\testRepository\nekoworld\main.h(1,1): warning C4819: ファイルは、現在のコード ページ (932) で表示できない文字を含んでいます。データの損失を防ぐために、ファイルを Unicode 形式で保存してください。
   コードを生成中...
-  BaseProject.vcxproj -> C:\Users\PC_User\Desktop\5月課題\testRepository\nekoworld\Debug\BaseProject.exe
+C:\Users\PC_User\Desktop\5月課題\testRepository\nekoworld\main.cpp : fatal error C1090: PDB API の呼び出しに失敗しました。エラー コード '3': C:\Users\PC_User\Desktop\5月課題\testRepository\nekoworld\Debug\vc142.pdb
