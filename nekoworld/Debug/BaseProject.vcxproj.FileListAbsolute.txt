@@ -1,0 +1,2 @@
+C:\Users\PC_User\Desktop\5月課題\testRepository\nekoworld\Debug\BaseProject.exe
+C:\Users\PC_User\Desktop\5月課題\testRepository\nekoworld\Debug\BaseProject.pdb
