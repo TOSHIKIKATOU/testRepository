@@ -56,6 +56,8 @@ void PlayerSystemInit(void)
 	player1.damageFlag = false;
 
 	lifeCnt = 0;
+
+	//SetTransColor(255, 255, 255);		// w’è‚µ‚½F‚ğ“§‰ß‚·‚é
 	
 
 	// ’â~ó‘Ô
@@ -65,8 +67,9 @@ void PlayerSystemInit(void)
 	// ¼Ş¬İÌßó‘Ô
 	p1JumpImage[NORMAL_INDEX] = LoadGraph("image/jump.png");
 	p1JumpImage[SHOT_INDEX] = LoadGraph("image/jump_shot.png");
+
 	// ‘–‚Á‚Ä‚éó‘Ô
-	LoadDivGraph("image/run.png", 4, 4, 1, 96, 64, p1RunImage[NORMAL_INDEX]);
+	LoadDivGraph("image/runing.png", 2, 2, 1, 80, 80, p1RunImage[NORMAL_INDEX]);
 	LoadDivGraph("image/run_shot.png", 4, 4, 1, 96, 64, p1RunImage[SHOT_INDEX]);
 	// ÀŞÒ°¼Ş‚ğó‚¯‚½ó‘Ô
 	p1DamageImage = LoadGraph("image/damage.png");

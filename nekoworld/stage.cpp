@@ -16,6 +16,7 @@
 int chipImage[13];
 XY mapPos;
 int haikeiimage;
+XY haikeiPos;
 
 int map[MAP_Y][MAP_X] = {
 { 12, 0, 0, 0, 0, 0, 0, 0,	0, 0, 0, 0, 0, 0, 0, 0,  0, 0, 0, 0, 0, 0, 0, 0,  0, 0, 0, 0, 0, 0, 0, 0,  0, 0, 0, 0, 0, 0, 0, 0,  0, 0, 0, 0, 0, 0, 0, 0,  0, 0, 0, 0, 0, 0, 0, 0,  0, 0, 0, 0, 0, 0, 0,12 },
@@ -53,7 +54,7 @@ bool StageSystemInit(void)
 		return false;
 	}
 
-	LoadGraph("image/haikei.png");
+	haikeiimage = LoadGraph("image/haikei.png");
 
 	return true;
 }
@@ -118,6 +119,12 @@ bool IsPass(XY pos)
 // ½Ã°¼Þ‚Ì•`‰æ
 void StageGameDraw(void)
 {
+	
+
+	DrawGraph(0
+		, 0
+		, haikeiimage, true);
+
 	for (int y = 0; y < MAP_Y; y++)
 	{
 		for (int x = 0; x < MAP_X; x++)
@@ -128,7 +135,4 @@ void StageGameDraw(void)
 		}
 	}
 
-	DrawGraph(0
-		, 0
-		, haikeiimage, true);
 }
