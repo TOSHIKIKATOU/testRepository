@@ -120,10 +120,8 @@ bool IsPass(XY pos)
 void StageGameDraw(void)
 {
 	
-
-	DrawGraph(0
-		, 0
-		, haikeiimage, true);
+	
+	
 
 	for (int y = 0; y < MAP_Y; y++)
 	{
@@ -134,5 +132,9 @@ void StageGameDraw(void)
 				, chipImage[map[y][x]], true);
 		}
 	}
+
+	DrawGraph(0
+		, 0
+		, haikeiimage, true);
 
 }

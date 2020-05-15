@@ -69,7 +69,7 @@ void PlayerSystemInit(void)
 	p1JumpImage[SHOT_INDEX] = LoadGraph("image/jump_shot.png");
 
 	// ‘–‚Á‚Ä‚éó‘Ô
-	LoadDivGraph("image/runing.png", 2, 2, 1, 80, 80, p1RunImage[NORMAL_INDEX]);
+	LoadDivGraph("image/running.png", 2, 2, 1, 80, 80, p1RunImage[NORMAL_INDEX]);
 	LoadDivGraph("image/run_shot.png", 4, 4, 1, 96, 64, p1RunImage[SHOT_INDEX]);
 	// ÀŞÒ°¼Ş‚ğó‚¯‚½ó‘Ô
 	p1DamageImage = LoadGraph("image/damage.png");
