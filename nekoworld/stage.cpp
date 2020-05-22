@@ -54,7 +54,7 @@ bool StageSystemInit(void)
 		return false;
 	}
 
-	haikeiimage = LoadGraph("image/haikei.png");
+	haikeiimage = LoadGraph("image/haikeiii.png");
 
 	return true;
 }

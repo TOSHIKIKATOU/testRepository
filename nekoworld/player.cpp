@@ -65,11 +65,12 @@ void PlayerSystemInit(void)
 	p1StopImage[SHOT_INDEX] = LoadGraph("image/stop_shot.png");
 	
 	// ¼Ş¬İÌßó‘Ô
-	p1JumpImage[NORMAL_INDEX] = LoadGraph("image/jump.png");
+	p1JumpImage[NORMAL_INDEX] = LoadGraph("image/ƒWƒƒƒ“ƒv.png");
 	p1JumpImage[SHOT_INDEX] = LoadGraph("image/jump_shot.png");
 
 	// ‘–‚Á‚Ä‚éó‘Ô
-	LoadDivGraph("image/running.png", 2, 2, 1, 80, 80, p1RunImage[NORMAL_INDEX]);
+	LoadDivGraph("image/run5.png", 4, 4, 1, 80, 80, p1RunImage[NORMAL_INDEX]);
+	// ’e‚ğŒ‚‚Á‚Ä‚¢‚éó‘Ô
 	LoadDivGraph("image/run_shot.png", 4, 4, 1, 96, 64, p1RunImage[SHOT_INDEX]);
 	// ÀŞÒ°¼Ş‚ğó‚¯‚½ó‘Ô
 	p1DamageImage = LoadGraph("image/damage.png");
