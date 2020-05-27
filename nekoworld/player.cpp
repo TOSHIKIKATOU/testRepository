@@ -26,6 +26,8 @@ int p1RunImage[2][4];	// 走り状態の画像
 int p1JumpImage[2];	// ｼﾞｬﾝﾌﾟ中の画像
 int p1DamageImage;	// ﾀﾞﾒｰｼﾞ画像
 int p1TobichiriImage[6];
+int p1speedcnt;
+int p1speed;
 
 XY_F playerPosHit;
 
@@ -55,13 +57,16 @@ void PlayerSystemInit(void)
 	player1.shotFlag = false;
 	player1.damageFlag = false;
 
+	p1speedcnt = 0;
+	p1speed = 0;
+
 	lifeCnt = 0;
 
 	//SetTransColor(255, 255, 255);		// 指定した色を透過する
 	
 
 	// 停止状態
-	p1StopImage[NORMAL_INDEX] = LoadGraph("image/stop.png");
+	p1StopImage[NORMAL_INDEX] = LoadGraph("image/寝る.png");
 	p1StopImage[SHOT_INDEX] = LoadGraph("image/stop_shot.png");
 	
 	// ｼﾞｬﾝﾌﾟ状態
@@ -103,6 +108,9 @@ void PlayerGameInit(void)
 	player1.shotFlag = false;
 	player1.damageFlag = false;
 
+	p1speedcnt = 0;
+	p1speed = 60;
+
 	lifeCnt = 0;
 }
 
@@ -127,13 +135,17 @@ void PlayerControl(void)
 	XY blockPos;
 
 	
-	// 右移動
-	if (keyNew[KEY_ID_P1RIGHT])
-	{
-		moveFlag = true;
-		player1.moveDir = DIR_RIGHT;
-		player1.runFlag = true;
-	}
+	//// 右移動
+	//if (keyNew[KEY_ID_P1RIGHT])
+	//{
+	//	moveFlag = true;
+	//	player1.moveDir = DIR_RIGHT;
+	//	player1.runFlag = true;
+	//}
+
+	moveFlag = true;
+	player1.moveDir = DIR_RIGHT;
+	player1.runFlag = true;
 	
 	// 左移動
 	if (keyNew[KEY_ID_P1LEFT])
@@ -334,12 +346,6 @@ void PlayerControl(void)
 			player1.velocity.x = 0;
 		}
 
-
-
-
-		
-		
-
 	}
 
 	if (IsPass(playerPosHit)
@@ -421,6 +427,12 @@ void PlayerControl(void)
 // ﾌﾟﾚｲﾔｰ1の操作
 void PlayerGameDraw(void)
 {
+	p1speedcnt++;
+	
+	if (p1speedcnt % 1800 == 0)
+	{
+		p1speed -= 5;
+	}
 
 	int playerImage;
 	int playerShotStatus;
@@ -429,7 +441,7 @@ void PlayerGameDraw(void)
 
 	playerImage = p1StopImage[playerShotStatus];
 
-	if (player1.runFlag) playerImage = p1RunImage[0][(player1.animCnt / 10 % 4)];
+	if (player1.runFlag) playerImage = p1RunImage[0][(player1.animCnt / p1speed % 4)];
 
 	if (player1.jumpFlag) playerImage = p1JumpImage[playerShotStatus];
 

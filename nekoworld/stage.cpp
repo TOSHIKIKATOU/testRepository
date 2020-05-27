@@ -17,6 +17,11 @@ int chipImage[13];
 XY mapPos;
 int haikeiimage;
 XY haikeiPos;
+int haikeiturnimage;
+XY haikeiturnPos;
+int haikeispeed;
+int haikeicnt;
+
 
 int map[MAP_Y][MAP_X] = {
 { 12, 0, 0, 0, 0, 0, 0, 0,	0, 0, 0, 0, 0, 0, 0, 0,  0, 0, 0, 0, 0, 0, 0, 0,  0, 0, 0, 0, 0, 0, 0, 0,  0, 0, 0, 0, 0, 0, 0, 0,  0, 0, 0, 0, 0, 0, 0, 0,  0, 0, 0, 0, 0, 0, 0, 0,  0, 0, 0, 0, 0, 0, 0,12 },
@@ -55,6 +60,10 @@ bool StageSystemInit(void)
 	}
 
 	haikeiimage = LoadGraph("image/haikeiii.png");
+	haikeiturnimage = LoadGraph("image/haikeiturn.png");
+
+	haikeispeed = 1;
+	haikeicnt = 0;
 
 	return true;
 }
@@ -66,6 +75,10 @@ void StageGameInit(void)
 	// •Ï”‚Ì‰Šú‰»
 	mapPos.x = 0;
 	mapPos.y = 0;
+	haikeiPos = { 0, 0};
+	haikeiturnPos = { SCREEN_SIZE_X, 0 };
+	haikeispeed = 1;
+	haikeicnt = 0;
 
 }
 
@@ -119,10 +132,14 @@ bool IsPass(XY pos)
 // ½Ã°¼Ş‚Ì•`‰æ
 void StageGameDraw(void)
 {
-	
-	
-	
+	haikeicnt++;
 
+	if (haikeicnt % 1800 == 0)
+	{
+		haikeispeed++;
+	}
+		
+	
 	for (int y = 0; y < MAP_Y; y++)
 	{
 		for (int x = 0; x < MAP_X; x++)
@@ -133,8 +150,28 @@ void StageGameDraw(void)
 		}
 	}
 
-	DrawGraph(0
+	// ”wŒi‰æ‘œ‚Ì•`‰æ
+	DrawGraph(haikeiPos.x
 		, 0
 		, haikeiimage, true);
+
+	// ”½“]‚µ‚½”wŒi‰æ‘œ‚Ì•`‰æ
+	DrawGraph(haikeiturnPos.x
+		, 0
+		, haikeiturnimage, true);
+
+	haikeiturnPos.x -= haikeispeed;		//  ”½“]‚µ‚½”wŒi‚ÌƒXƒNƒ[ƒ‹
+
+	haikeiPos.x -= haikeispeed;			// ”wŒi‚ÌƒXƒNƒ[ƒ‹
+
+	if (haikeiPos.x <= -SCREEN_SIZE_X)
+	{
+		haikeiPos.x = haikeiturnPos.x + SCREEN_SIZE_X;
+	}
+
+	if (haikeiturnPos.x <= -SCREEN_SIZE_X)
+	{
+		haikeiturnPos.x = haikeiPos.x + SCREEN_SIZE_X;
+	}
 
 }

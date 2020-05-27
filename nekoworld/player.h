@@ -20,6 +20,7 @@
 #define ACC_STOP			0.1	//’âŽ~‰Á‘¬“x
 #define VELOCITY_X_MAX		5		//X•ûŒü‚Ì‘¬“xMAX
 
+
 #define SHOT_POS 33				// ’e‚Ì”­ŽËˆÊ’u—p
 
 #define SHOT_IMGLOOK 50			// ’e‚Ì”­ŽËŠÔŠu
