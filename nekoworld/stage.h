@@ -13,9 +13,9 @@ extern XY mapPos;
 // íËêî
 //------------------------------------------------------------------
 #define MAP_X	64
-#define MAP_Y	15
-#define CHIP_SIZE_X		32
-#define CHIP_SIZE_Y		32
+#define MAP_Y	7
+#define CHIP_SIZE_X		72
+#define CHIP_SIZE_Y		72
 #define SCROLL_X_MIN 200
 #define SCROLL_X_MAX 600
 

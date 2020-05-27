@@ -52,7 +52,7 @@ void PlayerSystemInit(void)
 	player1.imgLockCnt = SHOT_IMGLOOK;										// ｷｬﾗｸﾀのｲﾒｰｼﾞ固定用ｶｳﾝﾀ
 	player1.velocity.x = 0;
 	player1.velocity.y = 0;
-	player1.runFlag = false;
+	player1.runFlag = true;
 	player1.jumpFlag = false;
 	player1.shotFlag = false;
 	player1.damageFlag = false;
@@ -135,13 +135,13 @@ void PlayerControl(void)
 	XY blockPos;
 
 	
-	//// 右移動
-	//if (keyNew[KEY_ID_P1RIGHT])
-	//{
-	//	moveFlag = true;
-	//	player1.moveDir = DIR_RIGHT;
-	//	player1.runFlag = true;
-	//}
+	// 右移動
+	if (keyNew[KEY_ID_P1RIGHT])
+	{
+		moveFlag = true;
+		player1.moveDir = DIR_RIGHT;
+		player1.runFlag = true;
+	}
 
 	moveFlag = true;
 	player1.moveDir = DIR_RIGHT;
@@ -242,111 +242,111 @@ void PlayerControl(void)
 	playerPosBK = player1.pos;
 	playerPosHit = playerPosBK;
 
-	// 移動ｷｰを押している時
-	if (moveFlag)
-	{
-		switch (player1.moveDir)
-		{
-		case DIR_RIGHT:
+	//// 移動ｷｰを押している時
+	//if (moveFlag)
+	//{
+	//	switch (player1.moveDir)
+	//	{
+	//	case DIR_RIGHT:
 
-			
-			player1.velocity.x += ACC_RUN;
-			if (player1.velocity.x > VELOCITY_X_MAX) player1.velocity.x = VELOCITY_X_MAX;
-			
-			//if (Kyori2(player1.pos) == false) player1.velocity.x = 0;
-			
-			break;
-		case DIR_LEFT:
-			if (player1.pos.x - player1.hitPosE.x - mapPos.x > 0 
-				|| player2.pos.x - player1.pos.x < 500)
-			{
-				player1.velocity.x -= ACC_RUN;
-				if (player1.velocity.x < -VELOCITY_X_MAX) player1.velocity.x = -VELOCITY_X_MAX;
-			}
-			//if (Kyori2(player1.pos) == true)player1.velocity.x = 0;
-			break;
+	//		
+	//		player1.velocity.x += ACC_RUN;
+	//		if (player1.velocity.x > VELOCITY_X_MAX) player1.velocity.x = VELOCITY_X_MAX;
+	//		
+	//		//if (Kyori2(player1.pos) == false) player1.velocity.x = 0;
+	//		
+	//		break;
+	//	case DIR_LEFT:
+	//		if (player1.pos.x - player1.hitPosE.x - mapPos.x > 0 
+	//			|| player2.pos.x - player1.pos.x < 500)
+	//		{
+	//			player1.velocity.x -= ACC_RUN;
+	//			if (player1.velocity.x < -VELOCITY_X_MAX) player1.velocity.x = -VELOCITY_X_MAX;
+	//		}
+	//		//if (Kyori2(player1.pos) == true)player1.velocity.x = 0;
+	//		break;
 
-		default:
-			break;
-		}
+	//	default:
+	//		break;
+	//	}
 
-	}
-	// ｷｰを押していない時
-	else
-	{
-		// 加速度による減速処理
-		if (player1.velocity.x < 0)
-		{
-			// 速度の計算
-			player1.velocity.x += ACC_STOP;
-		}
-		else if (player1.velocity.x > 0)
-		{
-			// 速度の計算
-			player1.velocity.x -= ACC_STOP;
-		}
-		// 速度がほとんどない場合は止めちゃう
-		if (player1.velocity.x > -ACC_STOP && player1.velocity.x < ACC_STOP)
-		{
-			player1.velocity.x = 0;
-		}
-	}
+	//}
+	//// ｷｰを押していない時
+	//else
+	//{
+	//	// 加速度による減速処理
+	//	if (player1.velocity.x < 0)
+	//	{
+	//		// 速度の計算
+	//		player1.velocity.x += ACC_STOP;
+	//	}
+	//	else if (player1.velocity.x > 0)
+	//	{
+	//		// 速度の計算
+	//		player1.velocity.x -= ACC_STOP;
+	//	}
+	//	// 速度がほとんどない場合は止めちゃう
+	//	if (player1.velocity.x > -ACC_STOP && player1.velocity.x < ACC_STOP)
+	//	{
+	//		player1.velocity.x = 0;
+	//	}
+	//}
 
-	// 左右の移動処理
-	if (player1.velocity.x > 0)
-	{
+	//// 左右の移動処理
+	//if (player1.velocity.x > 0)
+	//{
 
-		playerPosBK.x += player1.velocity.x;
+	//	playerPosBK.x += player1.velocity.x;
 
-		playerPosHit.x = playerPosBK.x + player1.hitPosE.x;
-		playerPosHitDown = playerPosHit;
-		playerPosHitDown.y -= player1.hitPosS.y;
-		playerPosHitUp = playerPosHit;
-		playerPosHitUp.y += player1.hitPosE.y - 1;// めり込んでいる分　-1している。
+	//	playerPosHit.x = playerPosBK.x + player1.hitPosE.x;
+	//	playerPosHitDown = playerPosHit;
+	//	playerPosHitDown.y -= player1.hitPosS.y;
+	//	playerPosHitUp = playerPosHit;
+	//	playerPosHitUp.y += player1.hitPosE.y - 1;// めり込んでいる分　-1している。
 
-		// 範囲ｽｸﾛｰﾙ
-		if (player1.pos.x - player2.pos.x < 500)
-		{
-			if ((player1.pos.x - mapPos.x) >= SCROLL_X_MAX)
-			{
-				mapPos.x += player1.velocity.x;
-			}
-		}
-		else if (player1.pos.x + player1.hitPosS.x - mapPos.x > SCREEN_SIZE_X)
-		{
-			player1.velocity.x = 0;
-		}
+	//	// 範囲ｽｸﾛｰﾙ
+	//	if (player1.pos.x - player2.pos.x < 500)
+	//	{
+	//		if ((player1.pos.x - mapPos.x) >= SCROLL_X_MAX)
+	//		{
+	//			mapPos.x += player1.velocity.x;
+	//		}
+	//	}
+	//	else if (player1.pos.x + player1.hitPosS.x - mapPos.x > SCREEN_SIZE_X)
+	//	{
+	//		player1.velocity.x = 0;
+	//	}
 
-		
+	//	
 
 
 
-	}
-	else if (player1.velocity.x < 0)
-	{
+	//}
+	//else if (player1.velocity.x < 0)
+	//{
 
-		playerPosBK.x += player1.velocity.x;
+	//	playerPosBK.x += player1.velocity.x;
 
-		playerPosHit.x = playerPosBK.x - player1.hitPosS.x;
-		playerPosHitDown = playerPosHit;
-		playerPosHitDown.y -= player1.hitPosS.y;
-		playerPosHitUp = playerPosHit;
-		playerPosHitUp.y += player1.hitPosE.y - 1;// めり込んでいる分　-1している。
+	//	playerPosHit.x = playerPosBK.x - player1.hitPosS.x;
+	//	playerPosHitDown = playerPosHit;
+	//	playerPosHitDown.y -= player1.hitPosS.y;
+	//	playerPosHitUp = playerPosHit;
+	//	playerPosHitUp.y += player1.hitPosE.y - 1;// めり込んでいる分　-1している。
 
-		// 範囲ｽｸﾛｰﾙ
-		if (player2.pos.x - player1.pos.x < 500)
-		{
-			if ((player1.pos.x - mapPos.x) <= SCROLL_X_MIN)
-			{
-				mapPos.x += player1.velocity.x;
-			}
-		}
-		else if (player1.pos.x - player1.hitPosE.x - mapPos.x < 0)
-		{
-			player1.velocity.x = 0;
-		}
+	//	// 範囲ｽｸﾛｰﾙ
+	//	if (player2.pos.x - player1.pos.x < 500)
+	//	{
+	//		if ((player1.pos.x - mapPos.x) <= SCROLL_X_MIN)
+	//		{
+	//			mapPos.x += player1.velocity.x;
+	//		}
+	//	}
+	//	else if (player1.pos.x - player1.hitPosE.x - mapPos.x < 0)
+	//	{
+	//		player1.velocity.x = 0;
+	//	}
 
-	}
+	//}
 
 	if (IsPass(playerPosHit)
 		&& IsPass(playerPosHitDown)

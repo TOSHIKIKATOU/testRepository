@@ -239,7 +239,7 @@ void InitScene(void)
 	Player2GameInit();
 	EffectGameInit();
 
-	time = 60;
+	time = 600;
 
 	logoRol = 0;
 
@@ -280,11 +280,11 @@ void TitleDraw(void)
 void GameScene(void)
 {
 
-	if (Player1Dawn() == true || Player2Dawn()  == true || time ==  0)
+	/*if (Player1Dawn() == true || Player2Dawn()  == true || time ==  0)
 	{
 		
 		fadeOut = true;
-	}
+	}*/
 	
 
 	// Pause‹@”\
@@ -348,12 +348,12 @@ void GameSceneDraw(void)
 
 	//DrawFormatString(32, 32, 0xFFFFFF, " %d ", aaaa, true);
 
-	if (time >= 10)
+	if (time >= 30)
 	{
 		SetFontSize(35);
 		DrawFormatString(365, 0, GetColor(0, 0, 0), "%d", time);
 	}
-	else if (time <= 9)
+	else if (time <= 29)
 	{
 		SetFontSize(60);
 		DrawFormatString(370, 0, GetColor(255, 0, 0), "%d", time);
