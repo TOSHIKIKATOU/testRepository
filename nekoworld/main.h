@@ -24,11 +24,9 @@
 //------------------------------------------------------------------
 #define SCREEN_SIZE_X	960
 #define SCREEN_SIZE_Y	480
-#define ACC_G			10	// 重力加速度
+#define ACC_G			7	// 重力加速度
 #define FRAME_TIME		0.3f	// [s]
-
-
-
+#define MUTEKI_TIME 80
 
 // 列挙型の定義
 //------------------------------------------------------------------
@@ -37,6 +35,7 @@ enum SCENE_ID
 {
 	SCENE_ID_INIT,			// 初期化ｼｰﾝ
 	SCENE_ID_TITLE,			// ﾀｲﾄﾙｼｰﾝ
+	SCENE_ID_SERECT,
 	SCENE_ID_GAME,			// ｹﾞｰﾑｼｰﾝ
 	SCENE_ID_GAMEOVER,		// ｹﾞｰﾑｵｰﾊﾞｰｼｰﾝ
 	SCENE_ID_MAX,
@@ -67,6 +66,12 @@ struct XY_F {
 	float y;
 };
 
+struct FILE_DATA
+{
+	int score;
+	int hiScore;
+};
+
 struct CHARACTER {
 	DIR moveDir;	//向いている方向
 	XY pos;			//キャラクタの位置（中心）
@@ -86,7 +91,12 @@ struct CHARACTER {
 	int imgLockCnt;		//キャラクタのイメージ固定用カウンタ
 	bool visible;		//表示状態
 	int type;			//何らかの属性を格納できる。
+	int chartype;
+	int point;
+	XY ipos;
+	int aniCnt;
 };
+
 
 
 // ﾌﾟﾛﾄﾀｲﾌﾟ宣言
@@ -96,12 +106,15 @@ void InitScene(void);							// 初期化用ｼｰﾝ用
 // ﾀｲﾄﾙｼｰﾝ
 void TitleScene(void);							// ﾀｲﾄﾙｼｰﾝ用
 void TitleDraw(void);							// ﾀｲﾄﾙｼｰﾝの描画
+//ｹﾞｰﾑｾﾚｸﾄｼｰﾝ
+void GameSerectScene(void);							// ｹﾞｰﾑｾﾚｸﾄｼｰﾝ用
+void GameSerectSceneDraw(void);						// ｹﾞｰﾑｾﾚｸﾄｼｰﾝの描画
 // ｹﾞｰﾑｼｰﾝ
 void GameScene(void);							// ｹﾞｰﾑｼｰﾝ用
 void GameSceneDraw(void);						// ｹﾞｰﾑｼｰﾝの描画
 // ｹﾞｰﾑｵｰﾊﾞｰｼｰﾝ
 void GameOverScene(void);						// ｹﾞｰﾑｵｰﾊﾞｰｼｰﾝ用
 void GameOverDraw(void);						// ｹﾞｰﾑｵｰﾊﾞｰｼｰﾝの描画
+void AddScore(int point);
 
-
-
+void DrawMenu(void);

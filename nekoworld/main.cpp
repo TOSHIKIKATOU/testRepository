@@ -17,6 +17,7 @@
 #include "shot.h"
 #include "shot2.h"
 #include "effect.h"
+#include"item.h"
 
 
 
@@ -31,14 +32,25 @@ int gameoverImage;
 int hitstartImage;
 int winImage[2];
 int drawImage;
-
 int time;
-
+int mtImage;
 int logoRol;
 float logoScl;
-
 int aaaa;
-
+int tlImage;
+int catImage[4];
+int haikei2image;
+XY haikei1Pos;
+XY haikeiturnPos;
+int haikei1image;
+int haikeiturnimage;
+FILE_DATA fileData;
+XY selectpos;
+int selectflag;
+int select2flag;
+int seCNT;
+int P1Image[4];
+int P2Image[4];
 // WinMain()
 int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
 {
@@ -87,13 +99,31 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
 				if (!FadeOutScreen(5))
 				{
 					// 刺膹I椆屻張棟
-					sceneID = SCENE_ID_GAME;
+					sceneID = SCENE_ID_SERECT;
 					fadeIn = true;
 					//SetDrawBright(255, 255, 255);
 
 				}
 			}
 		TitleScene();
+			break;
+		case SCENE_ID_SERECT:
+			if (fadeIn)
+			{
+				if (!FadeInScreen(5)) {}// 刺膹I椆屻張棟
+			}
+			else if (fadeOut)
+			{
+				if (!FadeOutScreen(5))
+				{
+					// 刺膹I椆屻張棟
+					sceneID = SCENE_ID_GAME;
+					fadeIn = true;
+					//SetDrawBright(255, 255, 255);
+
+				}
+			}
+			GameSerectScene();
 			break;
 
 			// 罐把
@@ -179,10 +209,12 @@ bool SystemInit(void)
 	Player2SystemInit();
 	ShotSystemInit();
 	Shot2SystemInit();
+	ItemSystemInit();
 	if (!EffectSystemInit()) return false;
 
 	//----- 皋滋ǒ競虛o榐
 
+	LoadDivGraph("image/run5.png", 4, 4, 1, 80, 80, catImage);
 	titleImage = LoadGraph("image/title.png");
 	if (titleImage == -1)
 	{
@@ -217,7 +249,20 @@ bool SystemInit(void)
 		AST();
 		retFlag = false;
 	}
-
+	mtImage= LoadGraph("image/傑偨偨傃.png");
+	if (mtImage == -1)
+	{
+		AST();
+		retFlag = false;
+	}
+	tlImage = LoadGraph("image/僞僀僩儖.png");
+	haikeiturnimage= LoadGraph("image/攚宨.png");
+	haikei1image = LoadGraph("image/攚宨.png");
+	haikei2image = LoadGraph("image/攚宨乽憪乿.png");
+	LoadDivGraph("image/run6.png", 4, 4, 1, 80, 80, P1Image);
+	LoadDivGraph("image/run7.png", 4, 4, 1, 80, 80, P2Image);
+	//P2Image = LoadGraph("image/拝抧.png");
+	//P3Image = LoadGraph("image/怮傞.png");
 	//----- 曄悢弶婜壔
 	SceneCounter = 0;
 	sceneID = SCENE_ID_INIT;
@@ -238,12 +283,19 @@ void InitScene(void)
 	PlayerGameInit();
 	Player2GameInit();
 	EffectGameInit();
-
-	time = 600;
-
+	ItemGameInit();
+	time = 60;
+	haikei1Pos = {0,0};
+	haikeiturnPos = { SCREEN_SIZE_X,0 };
 	logoRol = 0;
-
 	logoScl = 0.0f;
+	fileData.score = 0;
+	fileData.hiScore = 0;
+	selectpos = {0,0};
+	selectflag=false;
+	select2flag = false;
+	seCNT=0;
+
 }
 
 // 啦馁及輻p
@@ -257,6 +309,23 @@ void TitleScene(void)
 
 	}
 
+
+	haikei1Pos.x -= 5;			// 攚宨偺僗僋儘乕儖
+
+	if (haikei1Pos.x <= -SCREEN_SIZE_X)
+	{
+		haikei1Pos.x = SCREEN_SIZE_X;
+	}
+
+	
+
+
+	haikeiturnPos.x -= 5;		//  斀揮偟偨攚宨偺僗僋儘乕儖
+
+	if (haikeiturnPos.x <= -SCREEN_SIZE_X)
+	{
+		haikeiturnPos.x = SCREEN_SIZE_X;
+	}
 	
 	TitleDraw();
 }
@@ -267,25 +336,163 @@ void TitleDraw(void)
 	
 
 	//DrawFormatString(0, 0, 0xFFFFFF, "TitleScene : %d", SceneCounter, true);
+	// 攚宨夋憸偺昤夋
+	DrawGraph(haikei1Pos.x
+		, 0
+		, haikei1image, true);
+	// 斀揮偟偨攚宨夋憸偺昤夋
+	DrawTurnGraph(haikeiturnPos.x
+		, 0
+		, haikeiturnimage, true);
+	DrawGraph(200
+		, SCREEN_SIZE_Y-170
+		, catImage[(SceneCounter / 10 % 4)], true);
+	DrawGraph(haikei1Pos.x, 0, haikei2image, true);
+	DrawTurnGraph(haikeiturnPos.x, 0, haikei2image, true);
+	//DrawBox(100, 100, 700, 500, GetColor(0, 255, 0),true);
 
-	DrawBox(100, 100, 700, 500, GetColor(0, 255, 0),true);
-
-	DrawGraph(0, 0, titleImage, true);
-
-	DrawGraph(200, 430, hitstartImage, true);
+	//DrawGraph(0, 0, titleImage, true);
+	DrawGraph(0, 0, tlImage, true);
+	DrawGraph(300, 430, hitstartImage, true);
 
 }
+void GameSerectScene(void)
+{
+	
+	GameSerectSceneDraw();
+		
+		if (selectflag == false)
+		{
+			if (selectpos.y < 100)
+			{
+				if (keyDownTrigger[KEY_ID_P2RIGHT])
+				{
+					selectpos.y += 50;
+				}
+			}
+			if (selectpos.y > 0)
+			{
+				if (keyDownTrigger[KEY_ID_P2LEFT])
+				{
+					selectpos.y -= 50;
+				}
+			}
+		}
+		if (selectflag == true)
+		{
+			if (selectpos.x > 250)
+			{
+				if (keyDownTrigger[KEY_ID_P2LEFT])
+				{
+					selectpos.x -= 250;
+				}
+			}
+			if (selectpos.x < 500)
+			{
+				if (keyDownTrigger[KEY_ID_P2RIGHT])
+				{
+					selectpos.x += 250;
+				}
+			}
+		}
+		DrawMenu();
+		switch (selectpos.y)
+		{
+		case 0:	
+			if (keyDownTrigger[KEY_ID_ENTER])
+			{
+				selectpos.x = 500;
+				selectflag = !selectflag;
+				fadeOut = true;
+			}
+			break;
+		case 50:
+			if (keyDownTrigger[KEY_ID_ENTER])
+			{
+				selectpos.x = 500;
+				selectflag = !selectflag;
+				fadeOut = true;
+			}
+			break;
+		case 100:
+			if (keyDownTrigger[KEY_ID_ENTER])
+			{
+				selectpos.x = 500;
+				selectflag = !selectflag;
+				fadeOut = true;
+			}
 
+			break;
+		}
+
+	if (keyUpTrigger[KEY_ID_SPACE])
+	{
+
+		fadeOut = true;
+
+	}
+}
+void GameSerectSceneDraw(void)
+{
+	// 攚宨夋憸偺昤夋
+	DrawGraph(haikei1Pos.x
+		, 0
+		, haikei1image, true);
+	// 斀揮偟偨攚宨夋憸偺昤夋
+	DrawTurnGraph(haikeiturnPos.x
+		, 0
+		, haikeiturnimage, true);
+	DrawGraph(haikei1Pos.x, 0, haikei2image, true);
+	DrawTurnGraph(haikeiturnPos.x, 0, haikei2image, true);
+	//DrawBox(100, 100, 700, 500, GetColor(0, 255, 0),true);
+}
+void DrawMenu(void)
+{
+	if (selectpos.y == 0)
+	{
+		DrawBox(100, SCREEN_SIZE_Y / 2 - 100, 300, SCREEN_SIZE_Y / 2 + 100, 0x0000FF, false);
+		DrawExtendGraph(100, SCREEN_SIZE_Y / 2-100, 300, SCREEN_SIZE_Y/2+100,
+			catImage[(SceneCounter / 10 % 4)], true);
+		DrawExtendGraph(350, SCREEN_SIZE_Y / 2 - 100, 550, SCREEN_SIZE_Y / 2 + 100,
+			P1Image[(SceneCounter / 10 % 4)], true);
+		DrawExtendGraph(600, SCREEN_SIZE_Y / 2 - 100, 800, SCREEN_SIZE_Y / 2 + 100,
+			P2Image[(SceneCounter / 10 % 4)], true);
+		//DrawGraph(400, SCREEN_SIZE_Y / 2 - 50, P2Image, true);
+		//DrawGraph(600, SCREEN_SIZE_Y / 2 - 50, P3Image, true);
+	}
+	else if (selectpos.y == 50)
+	{
+		DrawBox(350, SCREEN_SIZE_Y / 2 - 100, 550, SCREEN_SIZE_Y / 2 + 100, 0x0000FF, false);
+
+		DrawExtendGraph(100, SCREEN_SIZE_Y / 2 - 100, 300, SCREEN_SIZE_Y / 2 + 100,
+			catImage[(SceneCounter / 10 % 4)], true);
+		DrawExtendGraph(350, SCREEN_SIZE_Y / 2 - 100, 550, SCREEN_SIZE_Y / 2 + 100,
+			P1Image[(SceneCounter / 10 % 4)], true);
+		DrawExtendGraph(600, SCREEN_SIZE_Y / 2 - 100, 800, SCREEN_SIZE_Y / 2 + 100,
+			P2Image[(SceneCounter / 10 % 4)], true);
+	}
+	else if (selectpos.y == 100)
+	{
+
+		DrawBox(600, SCREEN_SIZE_Y / 2 - 100, 800, SCREEN_SIZE_Y / 2 + 100, 0x0000FF, false);
+
+		DrawExtendGraph(100, SCREEN_SIZE_Y / 2 - 100, 300, SCREEN_SIZE_Y / 2 + 100,
+			catImage[(SceneCounter / 10 % 4)], true);
+		DrawExtendGraph(350, SCREEN_SIZE_Y / 2 - 100, 550, SCREEN_SIZE_Y / 2 + 100,
+			P1Image[(SceneCounter / 10 % 4)], true);
+		DrawExtendGraph(600, SCREEN_SIZE_Y / 2 - 100, 800, SCREEN_SIZE_Y / 2 + 100,
+			P2Image[(SceneCounter / 10 % 4)], true);
+	}
+}
 // 罐把及輻p
 void GameScene(void)
 {
 
-	/*if (Player1Dawn() == true || Player2Dawn()  == true || time ==  0)
+	if (Player1Dawn() == true || Player2Dawn()  == true || time ==  0)
 	{
 		
 		fadeOut = true;
-	}*/
-	
+	}
 
 	// Pause婡擻
 	if (keyUpTrigger[KEY_ID_PAUSE])
@@ -304,9 +511,12 @@ void GameScene(void)
 		DeleteShot2();
 		PlayerControl();
 		Player2Control();
+		/*StageGame();*/
 		ShotControl();
 		Shot2Control();
 		EffectControl();
+		ItemControl();
+		Deleteitem();
 		
 		if (SceneCounter % 60 == 59)
 		{
@@ -326,42 +536,30 @@ void GameScene(void)
 
 	return;
 }
-
 // 罐把及輦虝`夋
 void GameSceneDraw(void)
 {
-
 	StageGameDraw();
-
 	ShotGameDraw();
 
 	Shot2GameDraw();
-
 	PlayerGameDraw();
-
-	Player2GameDraw();
-
+	ItemDraw();
+	
 	EffectGameDraw();
-
-	//DrawFormatString(0, 0, 0xFFFFFF, "GameScene : %d", SceneCounter, true);
-
-
-	//DrawFormatString(32, 32, 0xFFFFFF, " %d ", aaaa, true);
-
-	if (time >= 30)
+	DrawFormatString(0, 0, 0xFFFFFF, "%d", fileData.score);
+	if (time >= 10)
 	{
 		SetFontSize(35);
 		DrawFormatString(365, 0, GetColor(0, 0, 0), "%d", time);
 	}
-	else if (time <= 29)
+	else if (time <= 9)
 	{
 		SetFontSize(60);
 		DrawFormatString(370, 0, GetColor(255, 0, 0), "%d", time);
 	}
 
 	//DrawBox(100, 100, 700, 500, GetColor(255, 0, 0), true);
-
-	
 }
 
 // 罐把蛋兽凹拜梡
@@ -390,19 +588,29 @@ void GameOverDraw(void)
 	// 寢壥傪傕偲偵昤夋
 	if (Player1Dawn() == false && Player2Dawn() == true)
 	{
-		DrawRotaGraph3(SCREEN_SIZE_X / 2, 240, 250, 50, logoScl, logoScl, (DX_PI_F / 180)*logoRol, winImage[0], true);
+		DrawRotaGraph3(SCREEN_SIZE_X / 2, 240, 250, 50, logoScl,
+			logoScl, (DX_PI_F / 180)*logoRol, winImage[0], true);
 	}
 	else if (Player1Dawn() == true && Player2Dawn() == false)
 	{
-		DrawRotaGraph3(SCREEN_SIZE_X / 2, 240, 250, 50, logoScl, logoScl, (DX_PI_F / 180)*logoRol, winImage[1], true);
+		DrawRotaGraph3(SCREEN_SIZE_X / 2, 240, 250, 50, logoScl
+			, logoScl, (DX_PI_F / 180)*logoRol, winImage[1], true);
 	}
 	else if (Player1Dawn() == true && Player2Dawn() == true || time <= 0 )
 	{
-		DrawRotaGraph3(SCREEN_SIZE_X / 2, 240, 250, 50, logoScl, logoScl, (DX_PI_F / 180)*logoRol, drawImage, true);
+		DrawRotaGraph3(SCREEN_SIZE_X / 2, 240, 250, 50, logoScl
+			, logoScl, (DX_PI_F / 180)*logoRol, drawImage, true);
 	}
 
 	//DrawBox(100, 100, 700, 500, GetColor(0, 0, 255), true);
 }
 
 
-
+void AddScore(int point)
+{
+	fileData.score += point;
+	if (fileData.hiScore < fileData.score)
+	{
+		fileData.hiScore = fileData.score;
+	}
+}

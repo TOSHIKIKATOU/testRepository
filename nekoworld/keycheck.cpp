@@ -42,9 +42,9 @@ void KeyCheck(void)
 	}
 	
 	// åªç›ÇÃèÛë‘ÇéÊìæÇ∑ÇÈ
-	keyNew[KEY_ID_SPACE] = CheckHitKey(KEY_INPUT_SPACE);
+	keyNew[KEY_ID_SPACE] = CheckHitKey(KEY_INPUT_W);
 	keyNew[KEY_ID_PAUSE] = CheckHitKey(KEY_INPUT_P);
-	keyNew[KEY_ID_P1UP] = CheckHitKey(KEY_INPUT_W);
+	keyNew[KEY_ID_P1UP] = CheckHitKey(KEY_INPUT_SPACE);
 	keyNew[KEY_ID_P2UP] = CheckHitKey(KEY_INPUT_UP);
 	keyNew[KEY_ID_P1RIGHT] = CheckHitKey(KEY_INPUT_D);
 	keyNew[KEY_ID_P2RIGHT] = CheckHitKey(KEY_INPUT_RIGHT);
@@ -53,7 +53,7 @@ void KeyCheck(void)
 	keyNew[KEY_ID_P2LEFT] = CheckHitKey(KEY_INPUT_LEFT);
 	keyNew[KEY_ID_P1SHOT] = CheckHitKey(KEY_INPUT_LCONTROL);
 	keyNew[KEY_ID_P2SHOT] = CheckHitKey(KEY_INPUT_RCONTROL);
-	
+	keyNew[KEY_ID_ENTER] = CheckHitKey(KEY_INPUT_RETURN);
 	
 	
 	for (int keyID = 0; keyID < KEY_ID_MAX; keyID++)

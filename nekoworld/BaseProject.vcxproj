@@ -132,6 +132,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="effect.cpp" />
+    <ClCompile Include="item.cpp" />
     <ClCompile Include="player2.cpp" />
     <ClCompile Include="scene.cpp" />
     <ClCompile Include="keycheck.cpp" />
@@ -143,6 +144,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="effect.h" />
+    <ClInclude Include="item.h" />
     <ClInclude Include="player2.h" />
     <ClInclude Include="scene.h" />
     <ClInclude Include="keycheck.h" />

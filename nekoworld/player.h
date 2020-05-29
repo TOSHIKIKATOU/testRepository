@@ -18,7 +18,8 @@
 
 #define ACC_RUN				0.5	//走る加速度
 #define ACC_STOP			0.1	//停止加速度
-#define VELOCITY_X_MAX		5		//X方向の速度MAX
+#define VELOCITY_X_MAX		1		//X方向の速度MAX
+#define VELOCITY_XX_MAX		1		//X方向の速度MAX
 
 
 #define SHOT_POS 33				// 弾の発射位置用
@@ -37,3 +38,6 @@ void PlayerGameDraw(void);							// ﾌﾟﾚｲﾔｰ1の描画
 bool Player1HitCheck(XY sPos, XY sSize);			// player1とplayer2との当たり判定 (true:自機が当たったら ,false:弾が外れたら)引数 : 弾の座標 , 弾の大き
 
 bool Player1Dawn(void);								// ﾌﾟﾚｲﾔｰ1のﾗｲﾌが0の時用
+
+bool ItemHitCheck(XY iPos, XY iSize);				// 
+void Muteki(void);									// プレイヤー
